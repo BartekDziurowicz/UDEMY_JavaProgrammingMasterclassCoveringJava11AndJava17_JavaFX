@@ -1,18 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.TilePane?>
-<TilePane xmlns:fx="http://javafx.com/fxml"
-          fx:controller="com.example.javafx.HelloController"
+<?import javafx.scene.layout.StackPane?>
+<StackPane xmlns:fx="http://javafx.com/fxml"
+           fx:controller="com.example.javafx.HelloController"
           >
-    <Button text="Button one"/>
-    <Button text="Button two"/>
-    <Button text="Button three"/>
-    <Button text="Button four"/>
-    <Button text="Button five"/>
-    <Button text="Button six"/>
-    <Button text="Button seven"/>
-    <Button text="Button eight"/>
-    <Button text="Button nine"/>
-    <Button text="Button ten"/>
-</TilePane>
+    <Button text="Button one" style="-fx-background-color: red"/>
+    <Label text="The label text style=" style="-fx-background-color: green"/>
+</StackPane>
