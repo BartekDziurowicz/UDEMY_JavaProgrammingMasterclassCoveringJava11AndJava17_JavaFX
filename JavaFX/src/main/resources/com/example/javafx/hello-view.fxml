@@ -2,9 +2,9 @@
 
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.control.Button?>
-<FlowPane xmlns:fx="http://javafx.com/fxml"
-          fx:controller="com.example.javafx.HelloController"
-          orientation="HORIZONTAL">
+<?import javafx.scene.layout.VBox?>
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.javafx.HelloController">
     <Button text="Button one"/>
     <Button text="Button two"/>
     <Button text="Button three"/>
@@ -15,4 +15,4 @@
     <Button text="Button eight"/>
     <Button text="Button nine"/>
     <Button text="Button ten"/>
-</FlowPane>
+</VBox>
