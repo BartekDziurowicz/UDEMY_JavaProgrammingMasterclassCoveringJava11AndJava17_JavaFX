@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.collections.FXCollections?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
+<?import java.lang.String?>
 <GridPane xmlns:fx="http://javafx.com/fxml"
           fx:controller="com.example.javafx.HelloController" alignment="center" hgap="10" vgap="10">
     <Button GridPane.rowIndex="0" GridPane.columnIndex="0" text="Click me">
@@ -44,5 +46,27 @@
         <ToggleButton text="Toogle Me2"/>
         <ToggleButton text="Toogle Me3"/>
     </HBox>
-
+    <TextField GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+    <PasswordField GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+    <ComboBox GridPane.rowIndex="2" GridPane.columnIndex="2">
+        <items>
+            <FXCollections fx:factory="observableArrayList">
+                <String fx:value="Option1"/>
+                <String fx:value="Option2"/>
+                <String fx:value="Option3"/>
+            </FXCollections>
+        </items>
+        <value>
+            <String fx:value="Option2"/>
+        </value>
+    </ComboBox>
+    <ChoiceBox GridPane.rowIndex="2" GridPane.columnIndex="3">
+        <items>
+            <FXCollections fx:factory="observableArrayList">
+                <String fx:value="cb1"/>
+                <String fx:value="cb2"/>
+                <String fx:value="cb3"/>
+            </FXCollections>
+        </items>
+    </ChoiceBox>
 </GridPane>
