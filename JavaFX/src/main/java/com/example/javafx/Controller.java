@@ -1,77 +1,52 @@
 package com.example.javafx;
 
-import javafx.application.Platform;
-import javafx.event.ActionEvent;
+import com.example.javafx.datamodel.TodoItem;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
+import javafx.scene.control.TextArea;
+import kotlin.collections.ArrayDeque;
+
+import java.time.LocalDate;
+import java.time.Month;
+import java.util.List;
 
 public class Controller {
-    @FXML
-    private TextField nameField;
-    @FXML
-    private Button helloButton;
-    @FXML
-    private Button byeButton;
-    @FXML
-    private CheckBox ourCheckBox;
-    @FXML
-    private Label ourLabel;
 
+    private List<TodoItem> todoItems;
+    @FXML
+    private ListView<TodoItem> todoListView;
+    @FXML
+    private TextArea itemDetailsTextArea;
     public void initialize() {
-        helloButton.setDisable(true);
-        byeButton.setDisable(true);
-    }
-    @FXML
-    public void onButtonClicked(ActionEvent e) {
-        if(e.getSource().equals(helloButton)){
-            System.out.println("Hello "+nameField.getText());
-        } else if (e.getSource().equals(byeButton)){
-            System.out.println("Bye "+nameField.getText());
-        }
+        TodoItem item1 = new TodoItem("Mail birthday card", "Buy a 30th birthday card",
+                LocalDate.of(2016, Month.APRIL, 25));
+        TodoItem item2 = new TodoItem("Doctors appointment", "See dr Smith",
+                LocalDate.of(2016, Month.AUGUST, 23));
+        TodoItem item3 = new TodoItem("Finish design proposal", "I promise Mike I'd email",
+                LocalDate.of(2016, Month.APRIL, 22));
+        TodoItem item4 = new TodoItem("Pickup Doug from train station", "Doug's arriving",
+                LocalDate.of(2016, Month.MARCH, 23));
+        TodoItem item5 = new TodoItem("Car wash", "Wash my car",
+                LocalDate.of(2016, Month.APRIL, 20));
 
-        Runnable task = new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    String s = Platform.isFxApplicationThread() ? "UI thread" : "background thread";
-                    System.out.println(s);
-                    Thread.sleep(3000);
-                    Platform.runLater(new Runnable() {
-                        @Override
-                        public void run() {
-                            String s = Platform.isFxApplicationThread() ? "UI thread" : "background thread";
-                            System.out.println(s);
-                            ourLabel.setText("Text changed");
-                        }
-                    });
-                } catch (InterruptedException ex) {
-                    throw new RuntimeException(ex);
-                }
-            }
-        };
+        todoItems = new ArrayDeque<>();
+        todoItems.add(item1);
+        todoItems.add(item2);
+        todoItems.add(item3);
+        todoItems.add(item4);
+        todoItems.add(item5);
 
-        new Thread(task).start();
-
-        if(ourCheckBox.isSelected()) {
-            nameField.clear();
-            helloButton.setDisable(true);
-            byeButton.setDisable(true);
-        }
-    }
-    @FXML
-    public void handleKeyReleased() {
-        String text = nameField.getText();
-        boolean disableButtons = text.isEmpty() || text.trim().isEmpty();
-        helloButton.setDisable(disableButtons);
-        byeButton.setDisable(disableButtons);
+        todoListView.getItems().setAll(todoItems);
+        todoListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
     }
 
     @FXML
-    public void handleChange() {
-        System.out.println("The checkbox is " + (ourCheckBox.isSelected() ? "checked" : "not checked"));
+    public void handleClickListView() {
+        TodoItem item = todoListView.getSelectionModel().getSelectedItem();
+        StringBuilder sb = new StringBuilder(item.getDetails());
+        sb.append("\n\n\nDate:\n"+item.getDeadLine().toString());
+        itemDetailsTextArea.setText(sb.toString());
     }
 
 }
