@@ -12,6 +12,7 @@ import kotlin.collections.ArrayDeque;
 
 import java.time.LocalDate;
 import java.time.Month;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class Controller {
@@ -48,7 +49,8 @@ public class Controller {
                 if(t1 != null) {
                     TodoItem item = todoListView.getSelectionModel().getSelectedItem();
                     itemDetailsTextArea.setText(item.getDetails());
-                    deadLineLabel.setText(item.getDeadLine().toString());
+                    DateTimeFormatter df = DateTimeFormatter.ofPattern("MMMM d, yyyy");
+                    deadLineLabel.setText(df.format(item.getDeadLine()));
                 }
             }
         });
